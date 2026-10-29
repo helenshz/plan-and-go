@@ -1,0 +1,3 @@
+[submodule "external/gazebo_world_generator"]
+	path = external/gazebo_world_generator
+	url = https://github.com/robotics-upo/gazebo_world_generator
