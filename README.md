@@ -2,8 +2,6 @@
 
 One floor plan, one sentence, and a robot walks to its goal in a building generated from that plan.
 
-Course project for *Agentic AI and Foundation Models* (WS2026/27).
-
 ## Pipeline
 
 **Stage 1 (core): floor plan → Gazebo world**
@@ -32,7 +30,11 @@ The LLMs only produce structured data (YAML / JSON plans). Geometry conversion, 
 
 ```
 plan-and-go/
+├── CLAUDE.md                          instructions for the coding agent
 ├── docs/PROJECT_PLAN.md               project plan, related work, eval design (Chinese)
+├── docs/adr/                          architecture decision records
+├── scripts/save_traces.sh             copy Claude Code transcripts into traces/, scan for keys
+├── traces/                            agent session transcripts (for the report)
 └── external/gazebo_world_generator    git submodule (MIT): SDF utils, JSON validator, LLM wrapper
 ```
 
@@ -44,11 +46,16 @@ git clone --recurse-submodules <repo-url>
 git submodule update --init --recursive
 ```
 
-External dependencies, not vendored here:
+ROS 2 Humble, Gazebo Classic 11, [`rmf_building_map_tools`](https://github.com/open-rmf/rmf_traffic_editor)
+(`.building.yaml` → `.world`), TurtleBot3 and Nav2 are installed into a conda env from
+[RoboStack](https://robostack.github.io), no system ROS needed:
 
-- ROS 2 Humble + Gazebo Classic 11 (or Jazzy + Harmonic)
-- [`rmf_building_map_tools`](https://github.com/open-rmf/rmf_traffic_editor) to convert `.building.yaml` to `.world`
-- TurtleBot3: `sudo apt install ros-humble-turtlebot3*`
+```bash
+conda env create -f environment.yml -p <path>/plan_and_go
+conda activate <path>/plan_and_go
+```
+
+Do not source a system ROS (`/opt/ros/humble/setup.bash`) in the same shell.
 
 ## Third-party code
 
