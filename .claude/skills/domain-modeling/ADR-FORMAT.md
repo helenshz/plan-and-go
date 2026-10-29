@@ -2,25 +2,27 @@
 
 ADRs live in `docs/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
 
-Create the `docs/adr/` directory lazily: only when the first ADR is needed.
-
 ## Template
 
-```md
-# {Short title of the decision}
+Copy `docs/adr/template.md` and fill in every section:
 
-{1-3 sentences: what's the context, what did we decide, and why.}
+```md
+# NNNN. Title
+
+- Status: proposed | accepted | superseded by NNNN
+- Date: YYYY-MM-DD
+
+## Context
+## Decision
+## Alternatives considered
+## Consequences
 ```
 
-That's it. An ADR can be a single paragraph. The value is in recording *that* a decision was made and *why*, not in filling out sections.
+Keep each section short; a few sentences or bullets are enough. The value is in recording
+*that* a decision was made, *why*, and what it rules out. See `docs/adr/0001-building-yaml-as-ir.md`
+for the expected length and tone.
 
-## Optional sections
-
-Only include these when they add genuine value. Most ADRs won't need them.
-
-- **Status** frontmatter (`proposed | accepted | deprecated | superseded by ADR-NNNN`): useful when decisions are revisited
-- **Considered Options**: only when the rejected alternatives are worth remembering
-- **Consequences**: only when non-obvious downstream effects need to be called out
+Write ADRs in English, since they are cited in the report.
 
 ## Numbering
 

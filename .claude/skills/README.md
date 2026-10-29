@@ -8,3 +8,10 @@
 
 Copied verbatim except for the Codex-only `agents/openai.yaml` files, which were dropped.
 Local changes to the skills are made in separate commits so the diff to upstream stays visible.
+
+Local changes:
+
+- `domain-modeling/ADR-FORMAT.md`: ADRs follow `docs/adr/template.md` (Status, Date, Context,
+  Decision, Alternatives, Consequences) instead of the upstream one-paragraph format; English only.
+  The "when to offer an ADR" criteria are kept unchanged.
+- `grilling/SKILL.md`: questions in Chinese, written files in English.

@@ -43,7 +43,10 @@ Do not add LLM calls to code paths that can be done deterministically.
 - Never commit, push, force-push, merge or delete branches without the user's explicit approval
   for that specific action. Editing a file is not permission to commit it, and an earlier
   approval does not carry over. After changes, show what changed and propose the commit message.
-- Work on a branch, one commit per finished step; the message says what and why.
+- Never commit directly to `main`. Each round of work gets its own branch (`<type>/<short-name>`,
+  e.g. `feat/self-critic`), merged through a PR with a merge commit, so `main` always works.
+- One commit per finished step; the message says what and why. Push once per round, not after
+  every commit.
 - Commit subjects follow Conventional Commits: `<type>: <lowercase summary>`, imperative, no
   trailing period. Types: `feat` (new functionality), `fix` (bug fix), `docs` (docs, ADRs,
   report), `test` (tests/evals only), `refactor` (no behaviour change), `chore` (env, tooling,
