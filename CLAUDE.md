@@ -11,6 +11,8 @@ Stage 2 (stretch): text task → LLM planner (fixed action set) → Nav2.
 
 Full plan, related work and eval design: `docs/PROJECT_PLAN.md` (Chinese).
 Architecture decisions: `docs/adr/`.
+Specs (one per round of work): `docs/specs/`.
+Domain terms: `GLOSSARY.md`.
 
 ## Core rule
 
