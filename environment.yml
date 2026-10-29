@@ -1,0 +1,12 @@
+name: plan_and_go
+channels:
+  - robostack-humble
+  - conda-forge
+  - nodefaults
+dependencies:
+  - ros-humble-turtlebot3-gazebo
+  - ros-humble-gazebo-ros-pkgs
+  - ros-humble-nav2-bringup
+  - ros-humble-rmf-building-map-tools
+  - ros-humble-navigation2
+  - ros-humble-ros-base
