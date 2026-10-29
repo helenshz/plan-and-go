@@ -40,7 +40,14 @@ Do not add LLM calls to code paths that can be done deterministically.
 
 - Spec before code; for any non-trivial architectural choice, add an ADR in `docs/adr/`
   (copy `docs/adr/template.md`, next number).
+- Never commit, push, force-push, merge or delete branches without the user's explicit approval
+  for that specific action. Editing a file is not permission to commit it, and an earlier
+  approval does not carry over. After changes, show what changed and propose the commit message.
 - Work on a branch, one commit per finished step; the message says what and why.
+- Commit subjects follow Conventional Commits: `<type>: <lowercase summary>`, imperative, no
+  trailing period. Types: `feat` (new functionality), `fix` (bug fix), `docs` (docs, ADRs,
+  report), `test` (tests/evals only), `refactor` (no behaviour change), `chore` (env, tooling,
+  scripts, traces, config). Example: `feat: add self-critic wall closure check`.
 - Do not squash merges; the history is graded.
 - Transcripts: run `scripts/save_traces.sh` before committing a session's work. It copies
   Claude Code sessions into `traces/`, redacts anything that looks like a key and fails if
