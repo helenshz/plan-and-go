@@ -244,6 +244,6 @@ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 
 - [x] 确认 `rmf_building_map_tools` 安装方式：apt 有 1.6.3，但项目改用 Data 盘上的 RoboStack conda 环境（`environment.yml`，1.5.0）；traffic_editor 在 conda 上没有（2026-10-29）
 - [ ] 读 `rmf_building_map_tools` 源码，整理 `.building.yaml` 真实字段规范（房间名怎么存、门参数）
-- [ ] 跑通 traffic_editor 手工描一张图 → world → TurtleBot3，确认后端链路
+- [x] 确认后端链路 building.yaml → world → TurtleBot3：改用手写 fixture（`tests/fixtures/two_rooms.building.yaml`）代替 traffic_editor，`pytest -m integration` 通过（spec 0001，2026-11-05）
 - [ ] 从 IFC 导出测试平面图 + ground truth
 - [ ] 调研 ROSA / ROS-LLM 的现状和许可证（阶段二）

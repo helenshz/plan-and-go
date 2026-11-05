@@ -10,3 +10,4 @@ dependencies:
   - ros-humble-rmf-building-map-tools
   - ros-humble-navigation2
   - ros-humble-ros-base
+  - pytest
