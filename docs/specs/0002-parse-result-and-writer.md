@@ -129,6 +129,18 @@ Integration test (`@pytest.mark.integration`):
     3.0 m (or no return). With a closed leaf it would read about 1.98 m.
 11. The spec 0001 integration test still passes unchanged (it uses the upstream generator).
 
+Door types (added 2026-11-05, after review): a second fixture,
+`tests/fixtures/door_types.parse.yaml`, has three rooms, a 0.9 m hinged door in a horizontal
+wall and a 1.2 m sliding door in a vertical wall.
+
+12. In the generated `.world` (XML, no Gazebo), for each door: the model is static and sits at the
+    middle of the opening (± 1 cm), its x axis lies along the wall, the leaf is
+    `width - 0.01` m wide, the joint is `revolute` for the hinged door and `prismatic` for the
+    sliding door, and the leaf pose in the world matches `door_geometry.open_leaves` (± 1 cm):
+    hinged perpendicular to the wall, sliding parallel to it and shifted by the door width.
+13. In Gazebo, a robot in the room both doors lead out of looks through each doorway: the rays
+    within ± 5° of each door's direction read more than 3.0 m (or no return).
+
 ## Out of scope
 
 - Calling a VLM, prompts and the self-critic loop (spec 0003).

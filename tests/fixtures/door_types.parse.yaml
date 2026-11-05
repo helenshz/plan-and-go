@@ -1,0 +1,32 @@
+# Parse result for spec 0002 criteria 12-13: one hinged and one sliding door.
+# Invented layout, 8 m x 7 m, drawn at 100 px/m. Pixels, y down.
+# Building lower-left corner at pixel (100, 800):
+#   x_px = 100 + 100 * x_m,   y_px = 800 - 100 * y_m
+#
+#   y=7 +---------------------------+
+#       |          room_c           |
+#   y=4 +---[hinged 0.9]------------+
+#       | room_a  [sliding 1.2] room_b
+#   y=0 +-------------+-------------+
+#      x=0           x=4           x=8
+#
+# hinged:  y = 4, x 1.55-2.45   (room_a <-> room_c)
+# sliding: x = 4, y 1.40-2.60   (room_a <-> room_b)
+scale:
+  p1: [100, 850]
+  p2: [900, 850]
+  meters: 8.0
+walls:
+  - {p1: [100, 800], p2: [900, 800], thickness: 10}   # bottom
+  - {p1: [900, 800], p2: [900, 100], thickness: 10}   # right
+  - {p1: [900, 100], p2: [100, 100], thickness: 10}   # top
+  - {p1: [100, 100], p2: [100, 800], thickness: 10}   # left
+  - {p1: [100, 400], p2: [900, 400], thickness: 10}   # horizontal, y = 4
+  - {p1: [500, 800], p2: [500, 400], thickness: 10}   # vertical, x = 4, y 0-4
+doors:
+  - {name: door_hinged, p1: [255, 400], p2: [345, 400], type: hinged}
+  - {name: door_sliding, p1: [500, 660], p2: [500, 540], type: sliding}
+rooms:
+  - {name: room_a, at: [300, 600]}
+  - {name: room_b, at: [700, 600]}
+  - {name: room_c, at: [500, 250]}

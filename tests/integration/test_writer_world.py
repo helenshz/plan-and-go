@@ -4,18 +4,13 @@ Spec: docs/specs/0002-parse-result-and-writer.md (acceptance criteria 8-10).
 Run inside the project conda env with access to the X display:  pytest -m integration
 """
 
-import os
 import shutil
-import subprocess
-import sys
 import xml.etree.ElementTree as ET
 
 import pytest
-import yaml
 
-from plan_and_go.parse_result import ParseResult
-from plan_and_go.writer import save_building, write_building
-from sim_helpers import REPO, err_lines, ranges_around, run_sim, valid_ranges
+from sim_helpers import (REPO, err_lines, ranges_around, run_sim, valid_ranges,
+                         write_and_generate)
 
 pytestmark = [
     pytest.mark.integration,
@@ -38,23 +33,8 @@ GAZEBO_PORT = 11386
 
 @pytest.fixture(scope='module')
 def generated(tmp_path_factory):
-    out = tmp_path_factory.mktemp('two_rooms_parsed')
-    building_file = out / 'two_rooms.building.yaml'
-    world = out / 'two_rooms.world'
-    model_dir = out / 'models'
-
-    parse_result = ParseResult.model_validate(yaml.safe_load(PARSE_FIXTURE.read_text()))
-    save_building(write_building(parse_result, 'two_rooms'), building_file)
-
-    env = dict(os.environ)
-    env['PYTHONPATH'] = os.pathsep.join(filter(None, [str(REPO / 'src'),
-                                                      env.get('PYTHONPATH')]))
-    result = subprocess.run(
-        [sys.executable, '-m', 'plan_and_go.generate_world', 'gazebo',
-         str(building_file), str(world), str(model_dir)],
-        capture_output=True, text=True, timeout=120, env=env,
-    )
-    return result, world, model_dir
+    return write_and_generate(PARSE_FIXTURE, tmp_path_factory.mktemp('two_rooms_parsed'),
+                              'two_rooms')
 
 
 def test_generator_writes_world_with_door(generated):
