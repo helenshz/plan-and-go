@@ -1,0 +1,20 @@
+# Parse result for spec 0002: the spec 0001 layout (two 4 m x 5 m rooms, door in the shared
+# wall) as a parser would report it from a drawing at 100 px/m.
+# Pixels, y down. Building lower-left corner at pixel (100, 700):
+#   x_px = 100 + 100 * x_m,   y_px = 700 - 100 * y_m
+# The left outer wall is 50 px (0.5 m) thick, all others 10 px (0.1 m).
+scale:                      # dimension line under the drawing: 8 m
+  p1: [100, 750]
+  p2: [900, 750]
+  meters: 8.0
+walls:
+  - {p1: [100, 700], p2: [900, 700], thickness: 10}   # bottom
+  - {p1: [900, 700], p2: [900, 200], thickness: 10}   # right
+  - {p1: [900, 200], p2: [100, 200], thickness: 10}   # top
+  - {p1: [100, 200], p2: [100, 700], thickness: 50}   # left, thick
+  - {p1: [500, 700], p2: [500, 200], thickness: 10}   # shared wall, one piece
+doors:
+  - {name: door_ab, p1: [500, 500], p2: [500, 400], type: hinged}
+rooms:
+  - {name: room_a, at: [300, 450]}
+  - {name: room_b, at: [700, 450]}
