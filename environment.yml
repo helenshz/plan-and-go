@@ -11,3 +11,4 @@ dependencies:
   - ros-humble-navigation2
   - ros-humble-ros-base
   - pytest
+  - pydantic>=2
