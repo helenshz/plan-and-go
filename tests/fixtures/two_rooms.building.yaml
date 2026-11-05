@@ -1,0 +1,48 @@
+# Hand-written fixture for spec 0001 (docs/specs/0001-yaml-to-world-backend.md).
+# Invented layout: two 4 m x 5 m rooms side by side, 8 m x 5 m in total,
+# one static hinged door (1 m wide) in the middle of the shared wall at x = 4.
+#
+# Format notes (rmf_building_map_tools 1.5.0):
+#   vertex:  [x, y, z, name, {params}]
+#   edge:    [start_idx, end_idx, {params}]   (walls, doors)
+#   param:   [type, value]   type: 1 string, 2 int, 3 double, 4 bool
+building_name: two_rooms
+coordinate_system: cartesian_meters
+levels:
+  L1:
+    elevation: 0.0
+    vertices:
+      - [0.0, 0.0, 0.0, ""]   # 0  room_a bottom-left
+      - [4.0, 0.0, 0.0, ""]   # 1  shared wall bottom
+      - [8.0, 0.0, 0.0, ""]   # 2  room_b bottom-right
+      - [8.0, 5.0, 0.0, ""]   # 3  room_b top-right
+      - [4.0, 5.0, 0.0, ""]   # 4  shared wall top
+      - [0.0, 5.0, 0.0, ""]   # 5  room_a top-left
+      - [4.0, 2.0, 0.0, ""]   # 6  door start
+      - [4.0, 3.0, 0.0, ""]   # 7  door end
+    walls:
+      # outer walls
+      - [0, 1, {}]
+      - [1, 2, {}]
+      - [2, 3, {}]
+      - [3, 4, {}]
+      - [4, 5, {}]
+      - [5, 0, {}]
+      # shared wall, split around the door
+      - [1, 6, {}]
+      - [7, 4, {}]
+    doors:
+      - - 6
+        - 7
+        - name: [1, door_ab]
+          type: [1, hinged]
+          motion_degrees: [3, 90.0]
+          motion_direction: [2, 1]
+          plugin: [1, none]
+    floors:
+      - vertices: [0, 1, 4, 5]
+        parameters:
+          room_name: [1, room_a]
+      - vertices: [1, 2, 3, 4]
+        parameters:
+          room_name: [1, room_b]
