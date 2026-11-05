@@ -69,13 +69,15 @@ All are checked by the integration test.
 1. **Door traversal.** Without `libdoor.so`, a door is either static and closed (`plugin: none`)
    or a free, unactuated panel. How should the robot get through a door: build the RMF door
    plugin from source, model doors as wall gaps, or something else? Decide when navigation
-   is needed; likely an ADR.
+   is needed; likely an ADR. **Answered by ADR 0004 (2026-11-05):** static leaves fixed open.
 2. **Real wall thickness.** All walls come out 0.1 m thick. Accept it and compare wall centre
    lines in evals, or extend `Wall` in our own code to read a thickness parameter? Decide in the
-   eval spec.
+   eval spec. **Answered by ADR 0003 (2026-11-05):** extend `Wall` via our own generator wrapper.
 3. **Writer coordinates.** Should the Writer emit pixel coordinates with a scale measurement
    (`reference_image`, can be overlaid on the floor plan in traffic_editor) or metres
-   (`cartesian_meters`)? Decide in spec 0002.
+   (`cartesian_meters`)? Decide in spec 0002. **Answered by ADR 0002 (2026-11-05):** the parser
+   outputs pixels and the Writer converts to metres (`cartesian_meters`).
 4. **Map for Nav2.** `rmf_building_map_tools` produces no occupancy grid. Rasterise walls from
    the building file ourselves, run SLAM, or use the map plugin from
-   `external/gazebo_world_generator`? Decide when Nav2 comes in.
+   `external/gazebo_world_generator`? Decide when Nav2 comes in. **Answered by ADR 0005
+   (2026-11-05):** rasterise from the building file; implemented with Nav2.
